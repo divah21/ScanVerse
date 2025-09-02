@@ -1,0 +1,21 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "files.exclude": {
+    "node_modules": true,
+    ".next": true,
+    "*.log": true
+  },
+  "search.exclude": {
+    "node_modules": true,
+    ".next": true,
+    "*.log": true,
+    "package-lock.json": true,
+    "pnpm-lock.yaml": true
+  }
+}

@@ -1,0 +1,67 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Production builds
+.next/
+out/
+dist/
+build/
+
+# Cache directories
+.cache/
+.parcel-cache/
+
+# Environment files
+.env
+.env.*
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+
+# Package manager lock files (keep only one)
+# yarn.lock
+# package-lock.json
+
+# Build artifacts
+.vercel/
+.netlify/
+
+# Generated files
+*.tsbuildinfo
+.turbo/
+
+# Documentation
+docs/build/

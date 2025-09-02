@@ -1,0 +1,48 @@
+<svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="logoGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Shield Icon -->
+  <g transform="translate(4, 6)">
+    <!-- Outer shield -->
+    <path d="M18 2L30 6V22C30 30 24 36 18 36C12 36 6 30 6 22V6L18 2Z" fill="url(#logoGradient)" opacity="0.1" filter="url(#logoGlow)"/>
+    
+    <!-- Main shield -->
+    <path d="M18 4L28 7V21C28 27 23 32 18 32C13 32 8 27 8 21V7L18 4Z" fill="url(#logoGradient)"/>
+    
+    <!-- Inner protection symbol -->
+    <path d="M18 10L24 13V19C24 22 21 25 18 25C15 25 12 22 12 19V13L18 10Z" fill="white" opacity="0.9"/>
+    
+    <!-- Checkmark -->
+    <path d="M16 18L17.5 19.5L21 16" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  
+  <!-- Text -->
+  <g transform="translate(44, 8)">
+    <!-- ScamVerse Text -->
+    <text x="0" y="20" fill="url(#logoGradient)" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="800" letter-spacing="-0.02em">ScamVerse</text>
+    
+    <!-- Tagline -->
+    <text x="0" y="35" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" letter-spacing="0.05em" opacity="0.8">SCAM PROTECTION PLATFORM</text>
+  </g>
+  
+  <!-- Animated particles -->
+  <circle cx="38" cy="12" r="1" fill="url(#logoGradient)" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="42" cy="30" r="0.8" fill="url(#logoGradient)" opacity="0.4">
+    <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/>
+  </circle>
+</svg>

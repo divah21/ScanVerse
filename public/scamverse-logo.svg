@@ -1,0 +1,22 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Shield Icon -->
+  <g transform="translate(10, 10)">
+    <path d="M20 5L35 10V25C35 35 27.5 40 20 40C12.5 40 5 35 5 25V10L20 5Z" fill="url(#logoGradient)"/>
+    <path d="M20 10L30 13V23C30 30 25 33 20 33C15 33 10 30 10 23V13L20 10Z" fill="white"/>
+    <path d="M18 20L20 22L25 17" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  
+  <!-- Text Logo -->
+  <g transform="translate(50, 15)">
+    <!-- ScamVerse Text -->
+    <text x="0" y="20" fill="url(#logoGradient)" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold">ScamVerse</text>
+    <text x="0" y="35" fill="#64748b" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500">Protect. Analyze. Secure.</text>
+  </g>
+</svg>
