@@ -1,4 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import {
+  createFetchWithTimeout,
+  retryWithBackoff,
+  isNetworkError,
+  getNetworkErrorMessage,
+} from '@/lib/network-utils'
 
 interface ChatMessage {
   role: 'user' | 'assistant' | 'system'
@@ -116,50 +122,76 @@ Remember: Not every cybersecurity question requires URL analysis. Answer natural
     }
 
     // Regular conversation - let AI handle naturally without forcing URL analysis
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'http://localhost:3000',
-        'X-Title': 'ScamVerse AI Assistant',
-      },
-      body: JSON.stringify({
-        model: model,
-        messages: chatMessages,
-        temperature: 0.7,
-        max_tokens: 300,
-        top_p: 0.9,
-      }),
-    })
+    try {
+      const response = await retryWithBackoff(
+        async () => {
+          const fetchWithTimeout = createFetchWithTimeout(20000) // 20 second timeout
 
-    if (!response.ok) {
-      const errorText = await response.text()
-      console.error('OpenRouter API error:', errorText)
+          return await fetchWithTimeout('https://openrouter.ai/api/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${apiKey}`,
+              'Content-Type': 'application/json',
+              'HTTP-Referer': 'http://localhost:3000',
+              'X-Title': 'ScamVerse AI Assistant',
+            },
+            body: JSON.stringify({
+              model: model,
+              messages: chatMessages,
+              temperature: 0.7,
+              max_tokens: 300,
+              top_p: 0.9,
+            }),
+          })
+        },
+        2,
+        1000
+      ) // 2 retries with 1 second base delay
 
-      // Fallback response
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error('OpenRouter API error:', errorText)
+
+        // Fallback response
+        return NextResponse.json({
+          success: true,
+          message:
+            "I'm here to help you stay safe online! You can ask me about scams, check suspicious websites, or get cybersecurity advice. How can I assist you today?",
+        })
+      }
+
+      const aiResponse = await response.json()
+      const assistantMessage = aiResponse.choices?.[0]?.message?.content
+
+      if (!assistantMessage) {
+        return NextResponse.json({
+          success: true,
+          message:
+            "I'm here to help with your cybersecurity questions! Feel free to ask me about scams, suspicious websites, or general online safety.",
+        })
+      }
+
+      return NextResponse.json({
+        success: true,
+        message: assistantMessage,
+      })
+    } catch (fetchError) {
+      console.error('OpenRouter fetch error:', fetchError)
+
+      if (isNetworkError(fetchError)) {
+        return NextResponse.json({
+          success: true,
+          message: `I'm experiencing connectivity issues (${getNetworkErrorMessage(fetchError)}). But I'm still here to help! You can ask me about scams, check suspicious websites, or get cybersecurity advice.`,
+        })
+      }
+
+      // Fallback response for network errors
       return NextResponse.json({
         success: true,
         message:
-          "I'm here to help you stay safe online! You can ask me about scams, check suspicious websites, or get cybersecurity advice. How can I assist you today?",
+          "I'm experiencing some connectivity issues right now, but I'm still here to help! You can ask me about scams, check suspicious websites, or get cybersecurity advice. How can I assist you today?",
       })
     }
-
-    const aiResponse = await response.json()
-    const assistantMessage = aiResponse.choices?.[0]?.message?.content
-
-    if (!assistantMessage) {
-      return NextResponse.json({
-        success: true,
-        message:
-          "I'm here to help with your cybersecurity questions! Feel free to ask me about scams, suspicious websites, or general online safety.",
-      })
-    }
-
-    return NextResponse.json({
-      success: true,
-      message: assistantMessage,
-    })
   } catch (error) {
     console.error('Chat API error:', error)
 

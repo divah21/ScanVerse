@@ -23,28 +23,33 @@ An AI-powered cybersecurity platform that protects users from online scams and f
 ## Getting Started
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/divah21/ScanVerse.git
    cd ScanVerse
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
-   
+
    Add your API keys:
+
    ```env
    OPENROUTER_API_KEY=your_openrouter_api_key_here
    OPENROUTER_MODEL=moonshot/kimi-dev-72b:free
    ```
 
 4. **Run the development server**
+
    ```bash
    pnpm dev
    ```
@@ -75,24 +80,28 @@ scamverse/
 ## Key Features
 
 ### 🔍 AI-Powered Analysis
+
 - Deep URL security scanning
 - Real-time threat detection
 - Confidence scoring and risk assessment
 - Detailed security recommendations
 
 ### 👨‍💼 Admin Dashboard
+
 - Collapsible sidebar navigation
 - Real-time analytics and metrics
 - Report management system
 - User and threat monitoring
 
 ### 🤖 Intelligent AI Assistant
+
 - Natural conversation interface
 - Automatic URL analysis detection
 - Contextual security advice
 - Animated floating interface
 
 ### 🎨 Modern Design
+
 - Dark theme with blue/cyan accents
 - Smooth GSAP animations
 - Responsive design
@@ -133,6 +142,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Security
 
 This project handles security-related data. Please ensure:
+
 - Never commit API keys or sensitive data
 - Keep dependencies updated
 - Follow security best practices
